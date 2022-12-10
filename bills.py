@@ -10,6 +10,7 @@ Description:
 
 
 def main():
+    print("hello world")
     header()
     command = input('Enter a command: ')
     print()
