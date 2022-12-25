@@ -78,6 +78,7 @@ class Bills_PRESET:
 
     def bills_list(self):
         """Prints each bill from the dictionary."""
+        # Pretty Print Bills
         for name, amount in self.bills.items():
             print('________________________')
             print(f'{name}: ${amount}')
@@ -87,7 +88,6 @@ class Bills_PRESET:
         """Prints the total for the month."""
         total = 0
 
-        # Pretty Print Bills
         for amount in self.bills.values():
             total += amount
         print(f'The total amount for this month is: ${round(total, 2)}')
@@ -153,6 +153,7 @@ class Bills_CUSTOM:
 
     def bills_list(self):
         """Prints each bill from the dictionary."""
+        # Pretty Print Bills
         for name, amount in self.bills.items():
             print('________________________')
             print(f'{name}: ${amount}')
@@ -162,7 +163,6 @@ class Bills_CUSTOM:
         """Prints the total for the month."""
         total = 0
 
-        # Pretty Print Bills
         for amount in self.bills.values():
             total += amount
         print(f'The total amount for this month is: ${round(total, 2)}')
