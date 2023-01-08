@@ -3,9 +3,9 @@ File: bills.py
 Author: Christopher Reid
 Description:
 - Calculates Monthly Expenses (Customizable and Preset Options)
+- Calculates Roommates Split Amount
 - Calculates Net Monthly Savings
 - Calculates Bills as % of Net Income
-- Calculates Roommates Split Amount
 """
 
 
@@ -30,183 +30,162 @@ def header():
     print('|                      |')
     print('|       COMMANDS       |')
     print('|______________________|')
-    print('SET: Default preset bills (Current as of October 2022).')
+    print('SET: Default preset bills (Current as of January 2023).')
     print('CUSTOM: Customize bill input.')
-    print(' _______________________________ ')
+    print()
 
 
 def bills_preset():
     """Bill presets current as of October 2022."""
-    rent = 1338.10
-    cars = 108.98
-    internet = 102.05
-    cell = 80.00
-    Bills_PRESET(rent, cars, internet, cell)
+    bills = {'rent': 1338.10,
+             'cars': 108.98,
+             'internet': 105.12,
+             'cell': 80.00,
+             'electricity': get_electricity_bill()
+             }
+    Bills_PRESET(bills)
 
 
 def bills_custom():
     """Returns a dictionary of bills as determined by user input."""
 
-    bills = {'rent': 0, 'car insurance': 0, 'internet': 0, 'cell phone': 0}
-    for expense in bills:
-        bills[expense] = float(input(f'How much was the {expense} bill this month?: '))
+    print('Input expense name and dollar amount (i.e: Rent 1100).')
+    print('Enter "done" when finished.')
+    print()
+    bills = {}
+    while True:
+        try:
+            bill_name, amount = input('Name & Amount: ').split()
+        except ValueError:
+            break
+        bills[bill_name] = float(amount)
+    print()
     Bills_CUSTOM(bills)
 
 
+def split_bills(total):
+    """Prints the amount based on the number of roommates. """
+    roommates = float(input('How many roommates are splitting the bill?: '))
+    if roommates <= 0:
+        print("Sorry, please enter a positive non-zero integer.")
+        print()
+        split_bills(total)
+    else:
+        split = round((total / roommates), 2)
+        return split
+
+
+def resources(savings):
+    phrase = 'Open this URL -> '
+    if savings < 0:
+        print(phrase + 'https://en.wikipedia.org/wiki/Millionaire')
+        print(phrase + 'https://en.wikipedia.org/wiki/The_Total_Money_Makeover ')
+        print(phrase + 'https://en.wikipedia.org/wiki/The_Millionaire_Next_Door')
+        print(phrase + 'https://en.wikipedia.org/wiki/Bad_debt')
+        print(phrase + 'https://en.wikipedia.org/wiki/Debt')
+    else:
+        print(phrase + 'https://en.wikipedia.org/wiki/Inflation')
+        print(phrase + 'https://en.wikipedia.org/wiki/The_Total_Money_Makeover ')
+        print(phrase + 'https://en.wikipedia.org/wiki/S%26P_500')
+        print(phrase + 'https://en.wikipedia.org/wiki/John_C._Bogle')
+        print(phrase + 'https://en.wikipedia.org/wiki/Dollar_cost_averaging')
+        print(phrase + 'https://jlcollinsnh.com/')
+    print()
+
+
+def get_electricity_bill():
+    """Prompts user for electric bill due to variation."""
+    return float(input('How much was the electric bill this month?: '))
+
+
 class Bills_PRESET:
-    def __init__(self, rent, cars, internet, cell):
+    def __init__(self, bills):
         """Passed preset values for bills as arguments."""
-        self.rent = rent
-        self.cars = cars
-        self.internet = internet
-        self.cell = cell
-        self.electricity = self.set_electricity()
+        self.bills = bills
+        self.total = self.pretty_print()
+        self.roommates = split_bills(self.total)
+        print()
+        print(f'BILL TOTAL: ${self.total}')
+        print(f'ROOMMATE SHARE: ${self.roommates}.')
+        print()
+        self.financial_stats()
 
-        self.bills = {
-            'Rent': self.rent,
-            'Car Insurance': self.cars,
-            'Internet': self.internet,
-            'Cell Phone': self.cell,
-            'Electricity': self.electricity
-        }
-        self.bills_list()
-        self.print_total()
-
-    def set_electricity(self):
-        """Prompts user for electric bill because it can vary."""
-        return float(input('How much was the electric bill this month?: '))
-
-    def bills_list(self):
-        """Prints each bill from the dictionary."""
-        # Pretty Print Bills
+    def pretty_print(self):
+        """Displays bills with total."""
         for name, amount in self.bills.items():
-            print('________________________')
             print(f'{name}: ${amount}')
-        print('________________________')
+        total = round(sum(self.bills.values()), 2)
+        print()
+        return total
 
-    def print_total(self):
-        """Prints the total for the month."""
-        total = 0
-
-        for amount in self.bills.values():
-            total += amount
-        print(f'The total amount for this month is: ${round(total, 2)}')
+    def financial_stats(self):
+        """Prints the relevant financial statistics for the month."""
+        print('------------------------')
+        print('USEFUL FINANCIAL STATS')
+        print('------------------------')
         print()
         income = float(input('Estimate this month\'s NET income: '))
         print()
 
         # Calculate Net Savings
-        print(f'You should have ${round(income - total)} leftover after expenses. ')
-        if income - total < 0:
-            print('Advice: You need to go on a budget.')
-            answer = input('...Want some advice on how to get rich? :) (Y/N): ')
-            if answer.upper() == 'Y':
-                print('Some resources...')
-                phrase = 'Click this URL -> '
-                print(phrase + 'https://en.wikipedia.org/wiki/Millionaire')
-                print(phrase + 'https://en.wikipedia.org/wiki/The_Total_Money_Makeover ')
-                print(phrase + 'https://en.wikipedia.org/wiki/The_Millionaire_Next_Door')
-                print(phrase + 'https://en.wikipedia.org/wiki/Bad_debt')
-                print(phrase + 'https://en.wikipedia.org/wiki/Debt')
-            elif answer.upper() == 'N':
-                print('Fine :) Your loss. ')
-        else:
-            print('Advice: Learn about Investing.')
-            print('Some resources...')
-            phrase = 'Click this URL -> '
-            print(phrase + 'https://en.wikipedia.org/wiki/Inflation')
-            print(phrase + 'https://en.wikipedia.org/wiki/The_Total_Money_Makeover ')
-            print(phrase + 'https://en.wikipedia.org/wiki/S%26P_500')
-            print(phrase + 'https://en.wikipedia.org/wiki/John_C._Bogle')
-            print(phrase + 'https://en.wikipedia.org/wiki/Dollar_cost_averaging')
-            print(phrase + 'https://jlcollinsnh.com/')
+        savings = round(income - self.total)
+        print(f'NET SAVINGS: ${savings}')
         print()
 
         # Calculate bills as % of total income
+        print('INCOME PERCENTAGE:')
         for bill in self.bills:
-            print(f'The {bill} bill is [{round((self.bills.get(bill) / income) * 100, 1)}%] of your income estimate.')
+            print(f'[{round((self.bills.get(bill) / income) * 100, 1)}%] = {bill}')
         print()
 
-        self.split_bills(total)
-
-    def split_bills(self, total):
-        """Prints the amount based on the number of roommates. """
-        roommates = float(input('How many roommates are splitting the bill?: '))
-        print()
-        split = round((total / roommates), 2)
-        print(f'This month\'s roommate share: ${split}.')
-        print()
+        # Resources
+        print('RESOURCES:')
+        resources(savings)
 
 
 class Bills_CUSTOM:
     def __init__(self, bills):
         """Passed a dictionary containing the bills as an argument."""
         self.bills = bills
-        self.bills['electricity'] = self.set_electricity()
+        self.total = self.pretty_print()
+        self.roommates = split_bills(self.total)
+        print()
+        print(f'BILL TOTAL: ${self.total}')
+        print(f'ROOMMATE SHARE: ${self.roommates}.')
+        print()
+        self.financial_stats()
 
-        self.bills_list()
-        self.print_total()
-
-    def set_electricity(self):
-        """Prompts user for electric bill because it can vary."""
-        return float(input('How much was the electric bill this month?: '))
-
-    def bills_list(self):
-        """Prints each bill from the dictionary."""
-        # Pretty Print Bills
+    def pretty_print(self):
+        """Displays bills with total."""
         for name, amount in self.bills.items():
-            print('________________________')
             print(f'{name}: ${amount}')
-        print('________________________')
+        total = round(sum(self.bills.values()), 2)
+        print()
+        return total
 
-    def print_total(self):
-        """Prints the total for the month."""
-        total = 0
-
-        for amount in self.bills.values():
-            total += amount
-        print(f'The total amount for this month is: ${round(total, 2)}')
+    def financial_stats(self):
+        """Prints the relevant financial statistics for the month."""
+        print('------------------------')
+        print('USEFUL FINANCIAL STATS')
+        print('------------------------')
         print()
         income = float(input('Estimate this month\'s NET income: '))
         print()
 
         # Calculate Net Savings
-        print(f'You should have ${round(income - total)} leftover after expenses. ')
-        if income - total < 0:
-            print('Advice: You need to go on a budget.')
-            print('Some resources...')
-            phrase = 'Click this URL -> '
-            print(phrase + 'https://en.wikipedia.org/wiki/Millionaire')
-            print(phrase + 'https://en.wikipedia.org/wiki/The_Total_Money_Makeover ')
-            print(phrase + 'https://en.wikipedia.org/wiki/The_Millionaire_Next_Door')
-            print(phrase + 'https://en.wikipedia.org/wiki/Bad_debt')
-            print(phrase + 'https://en.wikipedia.org/wiki/Debt')
-        else:
-            print('Learn about investing.')
-            print('Some resources...')
-            phrase = 'Click this URL -> '
-            print(phrase + 'https://en.wikipedia.org/wiki/Inflation')
-            print(phrase + 'https://en.wikipedia.org/wiki/The_Total_Money_Makeover ')
-            print(phrase + 'https://en.wikipedia.org/wiki/S%26P_500')
-            print(phrase + 'https://en.wikipedia.org/wiki/John_C._Bogle')
-            print(phrase + 'https://en.wikipedia.org/wiki/Dollar_cost_averaging')
-            print(phrase + 'https://jlcollinsnh.com/')
+        savings = round(income - self.total)
+        print(f'NET SAVINGS: ${savings}')
         print()
 
         # Calculate bills as % of total income
+        print('INCOME PERCENTAGE:')
         for bill in self.bills:
-            print(f'The {bill} bill is [{round((self.bills.get(bill) / income) * 100, 1)}%] of your income estimate.')
+            print(f'[{round((self.bills.get(bill) / income) * 100, 1)}%] = {bill}')
         print()
 
-        self.split_bills(total)
-
-    def split_bills(self, total):
-        """Prints the amount based on the number of roommates. """
-        roommates = float(input('How many roommates are splitting the bill?: '))
-        print()
-        split = round((total / roommates), 2)
-        print(f'This month\'s roommate share: ${split}.')
-        print()
+        # Resources
+        print('RESOURCES:')
+        resources(savings)
 
 
 main()
