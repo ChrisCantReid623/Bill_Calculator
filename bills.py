@@ -49,7 +49,7 @@ def bills_preset():
 def bills_custom():
     """Returns a dictionary of bills as determined by user input."""
 
-    print('Input expense name and dollar amount (i.e: Rent 1100).')
+    print('Input expense name and dollar amount (Sample Format: [ Rent 1100 ].')
     print('Enter "done" when finished.')
     print()
     bills = {}
