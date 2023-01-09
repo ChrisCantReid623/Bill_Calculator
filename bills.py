@@ -26,10 +26,16 @@ def main():
 
 
 def header():
-    print(' ______________________ ')
-    print('|                      |')
-    print('|       COMMANDS       |')
-    print('|______________________|')
+    print('  ____  _ _ _    _____      _            _       _             ')
+    print(' |  _ \(_) | |  / ____|    | |          | |     | |            ')
+    print(' | |_) |_| | | | |     __ _| | ___ _   _| | __ _| |_ ___  _ __ ')
+    print(' |  _ <| | | | | |    / _` | |/ __| | | | |/ _` | __/ _ \| \'__|')
+    print(' | |_) | | | | | |___| (_| | | (__| |_| | | (_| | || (_) | |   ')
+    print(' |____/|_|_|_|  \_____\__,_|_|\___|\__,_|_|\__,_|\__\___/|_|   ')
+    print('|                  |')
+    print('| CHOOSE A COMMAND |')
+    print('|__________________|')
+    print()
     print('SET: Default preset bills (Current as of January 2023).')
     print('CUSTOM: Customize bill input.')
     print()
