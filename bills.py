@@ -32,7 +32,7 @@ def display_title():
     print(ascii_banner)
     print(' ____________________')
     print(' \ CHOOSE A COMMAND  \\')
-    print('   ___________________')
+    print('  \___________________\\')
     print()
     print('SET: Default preset bills (Current as of January 2023).')
     print('CUSTOM: Customize bill input.')
