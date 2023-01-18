@@ -79,21 +79,10 @@ def split_bills(total):
         return split
 
 
-def resources(savings):
+def resources():
+    print('Here\'s a little book I wrote on personal finance. Hope you enjoy and learn! :)')
     phrase = 'Open this URL -> '
-    if savings < 0:
-        print(phrase + 'https://en.wikipedia.org/wiki/Millionaire')
-        print(phrase + 'https://en.wikipedia.org/wiki/The_Total_Money_Makeover ')
-        print(phrase + 'https://en.wikipedia.org/wiki/The_Millionaire_Next_Door')
-        print(phrase + 'https://en.wikipedia.org/wiki/Bad_debt')
-        print(phrase + 'https://en.wikipedia.org/wiki/Debt')
-    else:
-        print(phrase + 'https://en.wikipedia.org/wiki/Inflation')
-        print(phrase + 'https://en.wikipedia.org/wiki/The_Total_Money_Makeover ')
-        print(phrase + 'https://en.wikipedia.org/wiki/S%26P_500')
-        print(phrase + 'https://en.wikipedia.org/wiki/John_C._Bogle')
-        print(phrase + 'https://en.wikipedia.org/wiki/Dollar_cost_averaging')
-        print(phrase + 'https://jlcollinsnh.com/')
+    print(phrase + 'https://drive.google.com/file/d/1BkpjseROzhfaKMPNRIojX3Mkw2d3PkZU/view?usp=share_link')
     print()
 
 
@@ -144,7 +133,7 @@ class Bills_PRESET:
 
         # Resources
         print('RESOURCES:')
-        resources(savings)
+        resources()
 
 
 class Bills_CUSTOM:
@@ -189,7 +178,9 @@ class Bills_CUSTOM:
 
         # Resources
         print('RESOURCES:')
-        resources(savings)
+        resources(
+
+        )
 
 
 main()
