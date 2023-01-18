@@ -178,9 +178,7 @@ class Bills_CUSTOM:
 
         # Resources
         print('RESOURCES:')
-        resources(
-
-        )
+        resources()
 
 
 main()
