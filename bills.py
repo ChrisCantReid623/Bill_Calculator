@@ -10,39 +10,10 @@ Description:
 - Calculates Bills as % of Net Income
 """
 
-
-def main():
-    display_title()
-    command = input('Enter a command: ')
-    print()
-    if command.upper() == 'SET':
-        bills_preset()
-    elif command.upper() == 'CUSTOM':
-        bills_custom()
-
-    again = input('Would you like to run this again? (Y/N): ')
-    if again.upper() == 'Y':
-        main()
-    elif again.upper() == 'N':
-        exit()
-
-
-def display_title():
-    ascii_banner = pyfiglet.figlet_format("Bill Calculator")
-    print(ascii_banner)
-    print(' ____________________')
-    print(' \ CHOOSE A COMMAND  \\')
-    print('  \___________________\\')
-    print()
-    print('SET: Default preset bills (Current as of January 2023).')
-    print('CUSTOM: Customize bill input.')
-    print()
-
-
 def bills_preset():
     """Bill presets current as of October 2022."""
     bills = {'rent': 1338.10,
-             'cars': 108.98,
+             'cars': 108.03,
              'internet': 105.12,
              'cell': 80.00,
              'electricity': get_electricity_bill()
@@ -65,6 +36,18 @@ def bills_custom():
         bills[bill_name] = float(amount)
     print()
     Bills_CUSTOM(bills)
+
+
+def display_title():
+    ascii_banner = pyfiglet.figlet_format("Bill Calculator")
+    print(ascii_banner)
+    print(' ____________________')
+    print(' \ CHOOSE A COMMAND  \\')
+    print('  \___________________\\')
+    print()
+    print('SET: Default preset bills (Current as of January 2023).')
+    print('CUSTOM: Customize bill input.')
+    print()
 
 
 def split_bills(total):
@@ -179,6 +162,22 @@ class Bills_CUSTOM:
         # Resources
         print('RESOURCES:')
         resources()
+
+
+def main():
+    display_title()
+    command = input('Enter a command: ')
+    print()
+    if command.upper() == 'SET':
+        bills_preset()
+    elif command.upper() == 'CUSTOM':
+        bills_custom()
+
+    again = input('Would you like to run this again? (Y/N): ')
+    if again.upper() == 'Y':
+        main()
+    elif again.upper() == 'N':
+        exit()
 
 
 main()
