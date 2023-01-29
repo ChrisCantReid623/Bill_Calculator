@@ -13,7 +13,7 @@ Description:
 def bills_preset():
     """Bill presets current as of October 2022."""
     bills = {'rent': 1338.10,
-             'cars': 108.03,
+             'cars': 155.18,
              'internet': 105.12,
              'cell': 80.00,
              'electricity': get_electricity_bill()
