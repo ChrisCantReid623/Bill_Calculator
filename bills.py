@@ -10,15 +10,16 @@ Description:
 - Calculates Bills as % of Net Income
 """
 
-def bills_preset():
+CURRENT = {'rent': 1338.10,
+           'cars': 155.18,
+           'internet': 105.12,
+           'cell': 80.00
+           }
+
+def bills_preset(curr_bills):
     """Bill presets current as of October 2022."""
-    bills = {'rent': 1338.10,
-             'cars': 155.18,
-             'internet': 105.12,
-             'cell': 80.00,
-             'electricity': get_electricity_bill()
-             }
-    Bills_PRESET(bills)
+    curr_bills['electricity'] = get_electricity_bill()
+    Bills_PRESET(curr_bills)
 
 
 def bills_custom():
@@ -38,9 +39,13 @@ def bills_custom():
     Bills_CUSTOM(bills)
 
 
-def display_title():
+def display_title(current_bills):
     ascii_banner = pyfiglet.figlet_format("Bill Calculator")
     print(ascii_banner)
+    print('CURRENT BILLS:')
+    for name, amount in current_bills.items():
+        print(f'{name}: ${amount}')
+    print()
     print(' ____________________')
     print(' \ CHOOSE A COMMAND  \\')
     print('  \___________________\\')
@@ -164,12 +169,12 @@ class Bills_CUSTOM:
         resources()
 
 
-def main():
-    display_title()
+def main(current):
+    display_title(current)
     command = input('Enter a command: ')
     print()
     if command.upper() == 'SET':
-        bills_preset()
+        bills_preset(current)
     elif command.upper() == 'CUSTOM':
         bills_custom()
 
@@ -180,4 +185,4 @@ def main():
         exit()
 
 
-main()
+main(CURRENT)
