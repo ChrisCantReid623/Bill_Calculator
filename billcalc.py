@@ -1,7 +1,7 @@
 import pyfiglet
 
 """
-File: bills.py
+File: billcalc.py
 Author: Christopher Reid
 Description:
 - Calculates Monthly Expenses (Customizable and Preset Options)
@@ -58,13 +58,13 @@ def get_electricity_bill():
 def bills_custom():
     """Returns a dictionary of bills as determined by user input."""
 
-    print('Input expense name and dollar amount (Sample Format: [ Rent 1100 ].')
+    print('Input bill name and dollar amount - Sample Format: ( Rent 1100 ).')
     print('Enter "done" when finished.')
     print()
     bills = {}
     while True:
         try:
-            bill_name, amount = input('Name & Amount: ').split()
+            bill_name, amount = input('Bill & Amount: ').split()
         except ValueError:
             break
         bills[bill_name] = float(amount)
