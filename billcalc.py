@@ -27,7 +27,7 @@ def main(current):
 
     again = input('Would you like to run this again? (Y/N): ')
     if again.upper() == 'Y':
-        main()
+        main(current)
     elif again.upper() == 'N':
         exit()
 
