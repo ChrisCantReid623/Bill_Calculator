@@ -10,8 +10,11 @@ Description:
 - Calculates Bills as % of Net Income
 """
 
-CURRENT = {'rent': 1338.10,
-           'cars': 155.18,
+# Current as of March 1, 2023
+CURRENT = {'rent': 1265.00,
+           'processing/cc fee': 51.69,
+           'utilities': 98.12,
+           'insurance': 155.18,
            'internet': 105.12,
            'cell': 80.00
            }
