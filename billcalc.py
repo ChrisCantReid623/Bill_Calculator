@@ -12,8 +12,8 @@ Description:
 
 # Current as of March 1, 2023
 CURRENT = {'rent': 1265.00,
-           'processing/cc fee': 51.69,
-           'utilities': 98.12,
+           'processing/cc fee': 11.36,
+           'utilities': 150.72,
            'insurance': 155.18,
            'internet': 105.12,
            'cell': 80.00
