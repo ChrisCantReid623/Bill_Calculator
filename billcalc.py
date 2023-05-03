@@ -10,7 +10,7 @@ Description:
 - Calculates Bills as % of Net Income
 """
 
-# Current as of March 1, 2023
+# Current as of May 1, 2023
 CURRENT = {'rent': 1265.00,
            'processing/cc fee': 11.36,
            'utilities': 150.72,
