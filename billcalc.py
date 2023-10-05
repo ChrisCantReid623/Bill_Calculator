@@ -1,4 +1,4 @@
-import pyfiglet
+#import pyfiglet
 
 """
 File: billcalc.py
@@ -12,7 +12,7 @@ Description:
 
 # Current as of May 1, 2023
 CURRENT = {'rent': 1265.00,
-           'processing/cc fee': 11.36,
+           'processing/cc fee': 6.95,
            'utilities': 150.72,
            'insurance': 155.18,
            'internet': 105.12,
@@ -35,8 +35,8 @@ def main(current):
         exit()
 
 def display_title(current_bills):
-    ascii_banner = pyfiglet.figlet_format("Bill Calculator")
-    print(ascii_banner)
+    #ascii_banner = pyfiglet.figlet_format("Bill Calculator")
+    #print(ascii_banner)
     print('CURRENT BILLS:')
     for name, amount in current_bills.items():
         print(f'{name}: ${amount}')
